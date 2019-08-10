@@ -1,13 +1,13 @@
 /**
- * 创建于 2019-03-10
- * 作者: SHERlocked93
+ * 修改于 2019-08-10
+ * 作者: Best921
  * 功能: resolvers 实现
  */
 
 import Db from '../db'
 
 const { PubSub, withFilter } = require('apollo-server')
-const pubsub = new PubSub()
+const pubsub = new PubSub()// apollo-server 里负责订阅和发布的类，它在接受订阅时提供一个异步迭代器，在后端觉得需要发布订阅的时候向前端发布 payload
 
 const USER_UPDATE_CHANNEL = 'USER_UPDATE'
 
@@ -28,7 +28,7 @@ export default {
     },
     Subscription: {
         subsUser: {
-            subscribe: withFilter(
+            subscribe: withFilter(// 过滤掉不需要的订阅消息
                 (parent, { id }) => pubsub.asyncIterator(USER_UPDATE_CHANNEL),
                 (payload, variables) => payload.subsUser.id === variables.id
             ),

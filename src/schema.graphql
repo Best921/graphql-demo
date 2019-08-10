@@ -3,6 +3,8 @@ type Query {
     hello: String
     users: [User]!
     user(id: String): User
+    article(id: String): String
+    comment(id: String): String
 }
 
 # Mutation 入口
